@@ -16,11 +16,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class Produtos {
+public class Produto {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "codigo", nullable = false)
@@ -37,9 +37,11 @@ public class Produtos {
 
     @Column(name = "preco", nullable = false)
     @NotNull
-    @Length
     private BigDecimal preco;
 
+    @Column(name = "quantidade", nullable = false)
+    @NotNull
+    private Integer quantidade;
 
 
 

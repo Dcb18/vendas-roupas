@@ -15,10 +15,11 @@ import java.util.Date;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class Vendas {
+public class Venda {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "vendedor")
@@ -30,8 +31,15 @@ public class Vendas {
     private String cliente;
 
     @Column(name = "data_venda")
-    @NotNull
     private Date dataVenda;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "venda_id")
+//    private VendaProduto vendasProduto;
+
+    @Column(name = "pago")
+    private Boolean pago;
+
 
     @PrePersist
     private void SetOfDataVenda() {
