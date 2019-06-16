@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Posts</title>
+    <title>Lista de produtos</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -13,6 +13,20 @@
     <div class="panel-heading">
         <strong>Produto</strong>
     </div>
+    <div class="panel-footer">
+        <a class="btn btn-sm btn-success" style="margin: 10px;" th:href="@{/produtos/add/}" >Adicionar</a>
+    </div>
+    <form class="form-horizontal" th:object="${filter}" th:action="@{?codigo=${filter.codigo}}" method="GET" style="margin: 10px">
+    <div class="panel-footer" style="background-color: #fff;">
+            <label>Codigo</label>
+            <input type="text" style="width: 13%;" class="form-control input-sm" th:field="*{codigo}" autofocus="autofocus" placeholder="Informe o codigo" maxlength="50"/>
+        <button type="submit" class="btn btn-sm btn-primary">Pesquisar</button>
+    </div>
+        <div class=" panel-footerform-group row">
+
+        </div>
+    </form>
+
     <div class="panel-body" style="align-self:center; width: 66%;">
         <div class="table-responsive">
             <table class="table table-sm table-striped table-hover table-bordered">
@@ -27,26 +41,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="produtos : ${produtos}">
-                    <td th:text="${produtos.codigo}"></td>
-                    <td th:text="${produtos.desc}"></td>
-                    <td th:text="${produtos.sexo.label}"></td>
-                    <td th:text="${produtos.preco}"></td>
-                    <td th:text="${produtos.quantidade}"></td>
+                <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.codigo}"></td>
+                    <td th:text="${produto.desc}"></td>
+                    <td th:text="${produto.sexo.label}"></td>
+                    <td th:text="${produto.preco}"></td>
+                    <td th:text="${produto.quantidade}"></td>
                     <td>
                         <div class="btn-group pull-right">
-                            <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${produtos.id})}" >Editar</a>
-                            <a class="delete btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${produtos.id})}">Excluir</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/produtos/edit/{codigo}(codigo=${produto.codigo})}" >Editar</a>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+                <div class="col-md-2"></div>
+
+            </div>
         </div>
     </div>
-    <div class="panel-footer">
-        <a class="btn btn-sm btn-success" th:href="@{/add/}" >Adicionar</a>
-    </div>
+
 </div>
 </body>
 </html>

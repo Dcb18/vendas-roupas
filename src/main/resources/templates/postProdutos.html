@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de Produtos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default" style="align-self:center; width: 66%;">
+    <div class="panel-heading">
+        <strong>Cadastro de Produtos</strong>
+    </div>
+    <div class="panel-body" >
+        <form class="form-horizontal" th:object="${produto}" th:action="@{/produtos/save}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+                            <input type="hidden" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('codigo')}? 'has-error'">
+                            <label>Codigo</label>
+                            <input type="text" class="form-control input-sm" th:field="*{codigo}" autofocus="autofocus" placeholder="Informe o codigo" maxlength="50"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('desc')}? 'has-error'">
+                            <label>Descrição</label>
+                            <input type="text" class="form-control input-sm" th:field="*{desc}" autofocus="autofocus" placeholder="Informe a descrição" maxlength="50"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('sexo')}? 'has-error'">
+                            <label>Sexo</label>
+                            <select class="form-control input-sm" th:field="*{sexo}">
+                                <option value="" selected="selected">Selecione o sexo</option>
+                                <option th:each="sexo : ${sexo}" th:value="${sexo}" th:text="${sexo.label}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('preco')}? 'has-error'">
+                            <label>Valor</label>
+                            <input type="number" step="any"  class="form-control input-sm" th:field="*{preco}" maxlength="150" placeholder="Informe o preço" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('quantidade')}? 'has-error'">
+                            <label>Quantidade</label>
+                            <input type="number" class="form-control input-sm" th:field="*{quantidade}" maxlength="150" placeholder="Informe a quantidade" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
